@@ -6,6 +6,8 @@ const manageGameAPI = require("./routes/manageGame")
 const playerAPI = require("./routes/player")
 
 const PORT = process.env.PORT || 3000
+const cors = require('cors')
+app.use(cors())
 app.use(express.json())
 require('./db/config')
 

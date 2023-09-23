@@ -11,10 +11,11 @@ router.post("/", async (req, res, next) => {
 			req.body;
         // initialized 
         req.body.players = [];
-        await contests.create(req.body);
+        let a = await contests.create(req.body);
 		console.log("game created successfully");
 		res.status(200).send({
-			message: "game created successfully"
+			message: "game created successfully",
+			gameId: a._id.toString()
 		});
 	} catch (e) {
 		console.log(e);
