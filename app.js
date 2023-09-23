@@ -8,6 +8,13 @@ const playerAPI = require("./routes/player")
 const PORT = process.env.PORT || 3000
 const cors = require('cors')
 app.use(cors())
+app.options('*', cors())
+app.post('*', cors())
+app.get('*', cors())
+app.put('*', cors())
+app.delete('*', cors())
+app.patch('*', cors())
+
 app.use(express.json())
 require('./db/config')
 
