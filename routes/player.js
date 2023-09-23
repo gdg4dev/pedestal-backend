@@ -30,10 +30,11 @@ router
             if(!req.body.secondary) {
                 req.body.secondary = []
             }
-			await players.create(req.body);
+			let createdPlayer = await players.create(req.body);
 			console.log("player created successfully");
 			res.status(200).send({
 				message: "player created successfully",
+				details: createdPlayer
 			});
 		} catch (e) {
 			console.log(e);
