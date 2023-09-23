@@ -20,9 +20,10 @@ const contestSchema = new mongoose.Schema({
         required: true,
         type: Number
     },
-    playerAddress: {
-        type: String
+    players: {
+        required: true,
+        type: Array
     }
-})
+},  {timestamps: true})
 
 module.exports = mongoose.model('contests', contestSchema)

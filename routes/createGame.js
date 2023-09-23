@@ -9,6 +9,8 @@ router.post("/", async (req, res, next) => {
 	try {
 		let { gameName, maxPlayers, duration, stakeAmount, balanceToStart } =
 			req.body;
+        // initialized 
+        req.body.players = [];
         await contests.create(req.body);
 		console.log("User created successfully");
 		res.status(200).send({
@@ -18,7 +20,6 @@ router.post("/", async (req, res, next) => {
 		console.log(e);
 		res.status(400).send({ error: "Required Fields Missing"});
 	}
-	// res.send("hi")
 });
 
 module.exports = router;
