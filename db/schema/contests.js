@@ -23,6 +23,14 @@ const contestSchema = new mongoose.Schema({
     players: {
         required: true,
         type: Array
+    },
+    isGameActive: {
+        type: Boolean,
+        default: false
+    },
+    isGameFinished: {
+        type: Boolean,
+        default: false
     }
 },  {timestamps: true})
 

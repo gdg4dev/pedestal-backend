@@ -23,6 +23,25 @@ router
 			res.status(500).json({ error: "player not found -> db error" });
 		}
 	})
+	.post("/privy", async (req,res,send) => {
+		if (!req.body) return res.status(400).send({error: "No JSON data provided"})
+		if(!req.body.privyId) return res.status(400).send({error: "field privyId is required"})
+		try {
+			const player = await players.findOne({ privyId: await req.body.privyId }).exec();
+			if (player) {
+				console.log(player)
+			  	res.status(200).send({id: player._id.toString()})
+			} else {
+				//no user with privy id found
+				let createdPlayer = await players.create(req.body);
+				console.log("here")
+				res.status(200).send({id: createdPlayer._id.toString()})
+			}
+		  } catch (error) {
+			console.error('Error checking if player exists:', error);
+			res.status(500).send({error:true, log: error})
+		  }
+	})
 	.post("/", async (req, res, next) => {
 		try {
 			if (!req.body)

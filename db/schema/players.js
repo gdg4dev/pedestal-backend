@@ -8,6 +8,9 @@ const playerSchema = new mongoose.Schema({
         required: true,
         type: Array,
         default: []
+    },
+    privyId: {
+        type: String
     }
 },  {timestamps: true})
 
