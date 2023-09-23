@@ -4,6 +4,7 @@ const app = express()
 const createGameAPI = require("./routes/createGame")
 const PORT = process.env.PORT || 3000
 app.use(express.json())
+require('./db/config')
 
 app.use("/v1/createGame", createGameAPI)
 // app.use("/v1/manageGame", manageGameAPI)
