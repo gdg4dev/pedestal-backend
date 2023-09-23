@@ -12,7 +12,7 @@ router.post("/", async (req, res, next) => {
         // initialized 
         req.body.players = [];
         await contests.create(req.body);
-		console.log("User created successfully");
+		console.log("game created successfully");
 		res.status(200).send({
 			message: "game created successfully"
 		});

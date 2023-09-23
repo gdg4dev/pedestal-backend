@@ -10,7 +10,7 @@ router
     try {
         const game = await contests.findById(gameId);
         if (!game) {
-            return res.status(404).send('game not found');
+            return res.status(404).send({message: 'game not found'});
         }
         res.status(200).json(game);
     } catch (error) {
