@@ -21,6 +21,5 @@ require('./db/config')
 app.use("/v1/createGame", createGameAPI)
 app.use("/v1/manageGame", manageGameAPI)
 app.use("/v1/player", playerAPI)
-
-
+app.use("*", (req,res) => res.status(404).send({message: "ENDPOINT NOT FOUND"}))
 app.listen(PORT, ()=>console.log("Pedestal Server Running...."))
