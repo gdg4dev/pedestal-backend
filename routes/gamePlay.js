@@ -18,7 +18,7 @@ const gameExists = async (gameId) => {
 
 //create game
 router.put("/join", async (req, res, next) => {
-	const { primaryAddr, secondaryAddr, gameId } = req.params;
+	const { primaryAddr, secondaryAddr, gameId } = req.body;
 	// check if player exists
 
     if (await playerExists(primaryAddr)) {
