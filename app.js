@@ -6,6 +6,7 @@ const manageGameAPI = require("./routes/manageGame")
 const playerAPI = require("./routes/player")
 const gamePlayAPI = require("./routes/gamePlay")
 const transactionAPI = require("./routes/transactions")
+const contractAPI = require("./routes/contract")
 require("./utils/cron.js")
 
 const PORT = process.env.PORT || 3000
@@ -26,5 +27,7 @@ app.use("/v1/manageGame", manageGameAPI)
 app.use("/v1/player", playerAPI)
 app.use("/v1/gamePlay", gamePlayAPI)
 app.use("/v1/transactions", transactionAPI)
+// intentionally used this route 
+app.use("/v1/endGame")
 app.use("*", (req,res) => res.status(404).send({message: "ENDPOINT NOT FOUND"}))
 app.listen(PORT, ()=>console.log("Pedestal Server Running...."))

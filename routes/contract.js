@@ -12,27 +12,22 @@ const players = require("../db/schema/players");
 const web3 = new Web3(alchemyEndpoint); // Replace with your Infura project ID or your Ethereum node URL
 
 
-
-const contract = new web3.eth.Contract(contractABI, contractAddress);
-// const functionName = 'closeGame'; // Replace with the function name you want to call
-// const functionArguments = [arg1, arg2]; 
-
-const account = web3.eth.accounts.privateKeyToAccount(privateKey);
-web3.eth.accounts.wallet.add(account);
-
-const options = {
-    from: '0xYourWalletAddress', // Replace with your Ethereum wallet address
-    gasPrice: web3.utils.toWei('100', 'gwei'), // Customize gas price if needed
-    value: web3.utils.toWei('0.1', 'ether'), // Value to send if it's a payable function
+router.post('/endGame', async (req, res) => {
+  const { gameId, winnerAddress } = req.body;
+  const data = contract.methods.endGame(gameId, winnerAddress).encodeABI();
+  const tx = {
+    to: contractAddress,
+    data,
+    gas: 2000000,
   };
-
-contractABI
-
-console.log(abi)
+  try {
+    const signedTx = await web3.eth.accounts.signTransaction(tx, process.env.privateKey);
+    const receipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+    res.json(receipt);
+  } catch (error) {
+    res.status(500).json({ error: error.toString() });
+  }
+})
 
 
 module.exports = router;
-
-
-// TO DO s
-// 1. closeGame Function
