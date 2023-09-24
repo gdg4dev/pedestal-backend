@@ -26,7 +26,7 @@ const contestSchema = new mongoose.Schema({
     },
     isGameActive: {
         type: Boolean,
-        default: false
+        default: true
     },
     isGameFinished: {
         type: Boolean,

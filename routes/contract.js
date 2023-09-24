@@ -13,16 +13,25 @@ const web3 = new Web3(alchemyEndpoint); // Replace with your Infura project ID o
 
 
 
-// const contract = new web3.eth.Contract(contractABI, contractAddress);
+const contract = new web3.eth.Contract(contractABI, contractAddress);
 // const functionName = 'closeGame'; // Replace with the function name you want to call
 // const functionArguments = [arg1, arg2]; 
 
 const account = web3.eth.accounts.privateKeyToAccount(privateKey);
 web3.eth.accounts.wallet.add(account);
 
+const options = {
+    from: '0xYourWalletAddress', // Replace with your Ethereum wallet address
+    gasPrice: web3.utils.toWei('100', 'gwei'), // Customize gas price if needed
+    value: web3.utils.toWei('0.1', 'ether'), // Value to send if it's a payable function
+  };
+
 contractABI
 
 console.log(abi)
+
+
+module.exports = router;
 
 
 // TO DO s

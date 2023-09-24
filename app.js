@@ -5,6 +5,7 @@ const createGameAPI = require("./routes/createGame")
 const manageGameAPI = require("./routes/manageGame")
 const playerAPI = require("./routes/player")
 const gamePlayAPI = require("./routes/gamePlay")
+require("./utils/cron.js")
 
 const PORT = process.env.PORT || 3000
 const cors = require('cors')
