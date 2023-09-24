@@ -11,6 +11,10 @@ const playerSchema = new mongoose.Schema({
     },
     privyId: {
         type: String
+    },
+    gameHisory: {
+        type:Array,
+        default: []
     }
 },  {timestamps: true})
 

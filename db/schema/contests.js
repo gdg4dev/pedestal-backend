@@ -31,6 +31,10 @@ const contestSchema = new mongoose.Schema({
     isGameFinished: {
         type: Boolean,
         default: false
+    },
+    desposits: {
+        type: Array,
+        default: [],
     }
 },  {timestamps: true})
 
