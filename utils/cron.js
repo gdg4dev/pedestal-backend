@@ -7,7 +7,8 @@ const players = require("../db/schema/players");
 const transactions = require("../db/schema/transactions")
 require('../db/config')
 const axios = require('axios');
-const { init } =  require("@airstack/node");
+const { init, useQuery } =  require("@airstack/node");
+const { query } = require('express');
 init(process.env.AirstackAPI, "dev");
 
 const settings = {
@@ -45,17 +46,7 @@ const getTransactionHistory = async (noAddress) => {
 			  }
 			}
 		  }`
-		return axios({
-			url: 'https://your-graphql-endpoint.com',
-			method: 'post',
-			data: {
-			  query: queryToExtractTxHistory
-			}
-		  }).then((result) => {
-			result.send()
-		  }).catch((error) => {
-			console.error(error);
-		  });
+		return useQuery(query)
 	} 
 	let data = await alchemy.core.getAssetTransfers({
 		fromAddress: address,
