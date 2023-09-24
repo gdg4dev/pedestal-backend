@@ -6,6 +6,9 @@ const contests = require("../db/schema/contests");
 const players = require("../db/schema/players");
 const transactions = require("../db/schema/transactions")
 require('../db/config')
+const axios = require('axios');
+const { init } =  require("@airstack/node");
+init(process.env.AirstackAPI, "dev");
 
 const settings = {
 	apiKey: process.env.AlchemyAPI, // Replace with your Alchemy API key.
@@ -14,11 +17,51 @@ const settings = {
 
 const alchemy = new Alchemy(settings);
 
-const getTransactionHistory = async (address) => {
+const getTransactionHistory = async (noAddress) => {
+	if(!noAddress) {
+		const queryToExtractTxHistory = `query GetTransactionsFromAddressOnGoereli {
+			TokenTransfers(
+			  input: {filter: {from: {_eq: ${noAddress.secondary}}}, blockchain: ethereum}
+			) {
+			  TokenTransfer {
+				amount
+				blockNumber
+				blockTimestamp
+				from {
+				  addresses
+				}
+				to {
+				  addresses
+				}
+				tokenAddress
+				transactionHash
+				tokenId
+				tokenType
+				blockchain
+			  }
+			  pageInfo {
+				nextCursor
+				prevCursor
+			  }
+			}
+		  }`
+		return axios({
+			url: 'https://your-graphql-endpoint.com',
+			method: 'post',
+			data: {
+			  query: queryToExtractTxHistory
+			}
+		  }).then((result) => {
+			result.send()
+		  }).catch((error) => {
+			console.error(error);
+		  });
+	} 
 	let data = await alchemy.core.getAssetTransfers({
 		fromAddress: address,
 		category: ["external", "internal", "erc20"],
 	});
+	console.log(queryToExtractTxHistory)
 	return data;
 };
 

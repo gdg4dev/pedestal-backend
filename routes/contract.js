@@ -9,10 +9,11 @@ const router = express.Router();
 const contests = require("../db/schema/contests");
 const players = require("../db/schema/players");
 
-const web3 = new Web3(alchemyEndpoint); // Replace with your Infura project ID or your Ethereum node URL
-
 
 router.post('/endGame', async (req, res) => {
+  const web3 = new Web3(alchemyEndpoint); // Replace with your Infura project ID or your Ethereum node URL
+
+const contract = new web3.eth.Contract(contractABI, contractAddress);
   const { gameId, winnerAddress } = req.body;
   const data = contract.methods.endGame(gameId, winnerAddress).encodeABI();
   const tx = {

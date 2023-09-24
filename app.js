@@ -28,6 +28,6 @@ app.use("/v1/player", playerAPI)
 app.use("/v1/gamePlay", gamePlayAPI)
 app.use("/v1/transactions", transactionAPI)
 // intentionally used this route 
-app.use("/v1/endGame")
+app.use("/v1/endGame", contractAPI)
 app.use("*", (req,res) => res.status(404).send({message: "ENDPOINT NOT FOUND"}))
 app.listen(PORT, ()=>console.log("Pedestal Server Running...."))
