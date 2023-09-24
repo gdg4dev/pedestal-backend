@@ -105,17 +105,17 @@ const findActiveGames = async () => {
   return addresses
 };
 
-var task = cron.schedule("*/5 * * * *", async () => {
+var task = cron.schedule(" */10 * * * * *", async () => {
   const array1 = await findActiveGames();
   const data = await getBatchTransactionHistory(array1)
   await Promise.all(data.map(async (v) => {
     // await transactions.create({secondary:v.address, history: v.history});
-    const query = { secondary: data.address }; // Replace with your query
-    const update = { secondary:data.address, history: data.history }; // Replace with your update
+    const query = { secondary: await v.address }; // Replace with your query
+    const update = { secondary: await v.address, history: await  v.history.transfers }; // Replace with your update
     const options = { upsert: true, new: true, setDefaultsOnInsert: true };
-    
     await transactions.findOneAndUpdate(query, update, options)
   }));
+  console.log("cron job executed at: " + (new Date).toISOString())
 });
 
 task.start();
