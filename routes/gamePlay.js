@@ -62,7 +62,7 @@ router
                 if (await gameExists(gameId)) {
                     let updatedGame = await contests.findOneAndUpdate(
                         { _id: gameId },
-                        { $addToSet: { desposits: secondaryAddr } },
+                        { $addToSet: { deposits: secondaryAddr } },
                         { new: true }
                     );
                     if (updatedGame) {
