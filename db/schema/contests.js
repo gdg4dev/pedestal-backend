@@ -32,7 +32,7 @@ const contestSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    desposits: {
+    deposits: {
         type: Array,
         default: [],
     }
